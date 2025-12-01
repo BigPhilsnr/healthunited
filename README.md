@@ -1,4 +1,4 @@
-# Patient Management System
+# Healthcare United 
 
 A comprehensive microservices-based patient management system built with Spring Boot, featuring REST APIs, gRPC communication, event-driven architecture with Kafka, and API Gateway routing.
 
