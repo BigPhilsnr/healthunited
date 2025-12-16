@@ -45,4 +45,11 @@ public class PatientController {
         PatientResponseDTO updatedPatient = patientService.updatePatient(java.util.UUID.fromString(id), patientRequestDTO);
         return ResponseEntity.ok(updatedPatient);
     }
+
+    @PutMapping("/")
+    @Operation(summary = "Update an existing patient", description = "Update the details of an existing patient by ID")
+    public ResponseEntity<PatientResponseDTO> updatePatientd(@RequestParam String id, @Validated({Default.class}) @RequestBody PatientRequestDTO patientRequestDTO) {
+        PatientResponseDTO updatedPatient = patientService.updatePatient(java.util.UUID.fromString(id), patientRequestDTO);
+        return ResponseEntity.ok(updatedPatient);
+    }
 }

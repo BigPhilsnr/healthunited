@@ -22,7 +22,5 @@ public class KafkaConsumer {
         } catch (InvalidProtocolBufferException e) {
             log.error("Error while parsing patient event", e);
         }
-
-
     }
 }

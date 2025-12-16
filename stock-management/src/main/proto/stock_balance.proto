@@ -1,0 +1,11 @@
+syntax = "proto3";
+package stock.manager;
+
+option java_multiple_files = true;
+
+message  StockBalance {
+  string itemCode = 1;
+  string stockBalance = 2;
+  string itemName = 3;
+  string warehouse = 4;
+}

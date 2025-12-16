@@ -12,14 +12,29 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 public class PatientService {
     private PatientRepository patientRepository;
     private BillingServiceGrpcClient billingServiceGrpcClient;
     private final KfkaProducer producer;
+
+    Predicate<Patient>  patientPericate=  T ->  false;
+    Consumer<Patient> patientConsumer= p->{ System.out.println(p);} ;
+    Supplier<Patient> supplier= ()-> new Patient();
+
+    Function<Patient, Boolean> isPatientSick =  (x) ->
+        Objects.equals(String.valueOf(x.getId()), "q");
+    //primitive streams
+    IntStream randomIntStream = IntStream.rangeClosed(1, 100);
+    CompletableFuture<String> name = CompletableFuture.supplyAsync(() -> UUID.randomUUID().toString());
+
+
     public PatientService(PatientRepository patientRepository, BillingServiceGrpcClient billingServiceGrpcClient, KfkaProducer producer) {
         this.patientRepository = patientRepository;
         this.billingServiceGrpcClient = billingServiceGrpcClient;

@@ -9,6 +9,7 @@ import patient.events.PatientEvent;
 
 @Service
 public class KfkaProducer {
+
     private final KafkaTemplate<String, byte[]> kafkaTemplate;
     public KfkaProducer(KafkaTemplate<String, byte[]> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;

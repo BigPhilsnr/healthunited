@@ -161,19 +161,15 @@ services:
     container_name: api-gateway
     ports:
       - "4004:4004"
-      - "443:443"
     environment:
       AUTH_SERVICE_URL: http://auth-service:4005
-      SERVER_SSL_ENABLED: "true"
-      SERVER_SSL_KEY_STORE: /etc/ssl/certs/keystore.p12
-      SERVER_SSL_KEY_STORE_PASSWORD: changeit
-      SERVER_SSL_KEY_STORE_TYPE: PKCS12
-      SERVER_SSL_KEY_ALIAS: bluescript
+      SERVER_PORT: 4004
       VIRTUAL_HOST: bluescript.pro
+      VIRTUAL_PORT: 4004
       LETSENCRYPT_HOST: bluescript.pro
       LETSENCRYPT_EMAIL: philmaxsnr@gmail.com
-    volumes:
-      - ./certs:/etc/ssl/certs:ro
+    expose:
+      - "4004"
     depends_on:
       - patient-service
       - auth-service
@@ -196,6 +192,9 @@ services:
       - html:/usr/share/nginx/html
     environment:
       DEFAULT_HOST: bluescript.pro
+      TRUST_DOWNSTREAM_PROXY: "false"
+    depends_on:
+      - api-gateway
     networks:
       - patient-network
 
